@@ -1,31 +1,19 @@
-"use strict"
-
-function solveEquation(a, b, c) {
-	let arr = [];
-	let discriminant = Math.pow(b, 2) - 4 * a * c;
-	if (discriminant < 0) {
-		// Если дискриминант меньше нуля, корней нет (пустой массив)
-		return arr;
-	} else if (discriminant === 0) {
-		// Если дискриминант равен нулю, вычисляем один корень и возвращаем массив с одним корнем
-		let root = -b / (2 * a);
-		arr.push(root);
-		return arr;
-	} else {
-		// Если дискриминант больше нуля, вычисляем два корня и возвращаем массив с корнями
-		let root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
-		let root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
-		arr.push(root1);
-		arr.push(root2);
-		return arr;
-	}
+"use strict";
+function solveEquation(a,b,c)
+{
+  let arr = [];
+  let d = b**2 - 4*a*c;
+  if (d > 0) {
+    arr.push((-b + Math.sqrt(d))/(2*a));
+    arr.push((-b - Math.sqrt(d))/(2*a));
+  }
+  else if (d === 0){
+    arr.push(-b/(2*a));
+  }
+  return arr;
 }
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-	if (percent < 0 || contribution < 0 || amount < 0 || countMonths < 0) {
-		return 'Пожалуйста, введите корректные значения';
-	}
-
 	let monthlyPercent = percent / 100 / 12;
 	let loanAmount = amount - contribution;
 	let monthlyPayment = loanAmount * (monthlyPercent + monthlyPercent / (Math.pow((1 + monthlyPercent), countMonths) - 1));
